@@ -1,1 +1,11 @@
-テスト
+検索ワード
+<form phx-change="change" phx-submit="submit">
+  <input type="text" name="q" value={@q} />
+</form>
+<br />
+<%= for link <- @links do %>
+  <a class="rounded-lg bg-violet-600 w-12 px-2 text-white mt-20" href={link.url} target="_blank">
+    <%= link.text %>で検索
+  </a>
+  <br />
+<% end %>
