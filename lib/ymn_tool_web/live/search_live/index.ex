@@ -6,6 +6,7 @@ defmodule YmnToolWeb.SearchLive.Index do
     socket
     |> assign(q: "")
     |> assign_links("")
+    |> assign(prompt: "")
     |> then(&{:ok, &1})
   end
 
@@ -17,10 +18,11 @@ defmodule YmnToolWeb.SearchLive.Index do
     socket
     |> assign(q: q)
     |> assign_links(q)
+    |> assign_prompt(q)
     |> then(&{:noreply, &1})
   end
 
-  def assign_links(socket, q) do
+  defp assign_links(socket, q) do
     [
       set_url("https://qiita.com/search?q=Elixir+", q, "Qiita"),
       set_url("https://www.google.com/search?q=Elixir+", q, "Google"),
@@ -40,7 +42,16 @@ defmodule YmnToolWeb.SearchLive.Index do
     |> then(&assign(socket, links: &1))
   end
 
-  def set_url(url, q, text) do
+  defp set_url(url, q, text) do
     %{url: "#{url}#{q}", text: text}
+  end
+
+  defp assign_prompt(socket, q) do
+    """
+    Elixirで質問。下記を日本語で教えて
+
+    #{q}
+    """
+    |> then(&assign(socket, prompt: &1))
   end
 end
