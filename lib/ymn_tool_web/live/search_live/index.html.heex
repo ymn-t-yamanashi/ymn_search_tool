@@ -4,6 +4,9 @@
     if (focus != null) return 
     keyAssign(event, "g", "gemini")
     keyAssign(event, "c", "clear")
+    for(i = 1; i <= 7; i++) {
+      keyAssign(event, i, "link" + i)
+    }
 
   });
   function copy(){
@@ -31,14 +34,18 @@
   <input id="q" type="text" name="q" value={@q} />
 </form>
 <br />
-<%= for link <- @links do %>
-  <a class="rounded-lg bg-violet-600 w-12 px-2 text-white mt-20" href={link.url} target="_blank" noopener noreferrer>
-    <%= link.text %>で検索
+キー割当:()中のキーになります 例えば「g」キーを押すと「gemini」が起動します
+<br />
+<br />
+<%= for {link, index} <- Enum.with_index(@links, 1) do %>
+  <%  id= "link#{index}" %>
+  <a id={id} class="rounded-lg bg-violet-600 w-12 px-2 text-white mt-20" href={link.url} target="_blank" noopener noreferrer>
+    <%= link.text %>で検索<%= "(#{index})" %>
   </a>
   <br />
 <% end %>
 <br />
-<br /> LLM用プロンプト <br />
+<br /> LLM用プロンプト<br />
 <br />
 <a
   id="gemini"
@@ -51,8 +58,8 @@
   geminiを起動(g)
 </a>
 <br />
-クリックボードにコピーされますので<br />
-geminiを起動後手動で貼り付けてください
+プロンプトはクリックボードにコピーされま<br />
+geminiを起動後手動で貼り付け(Ctrl + v)てください
 <br />
 <br />
 <textarea id="llm" style="height: 150px; width:400px" name="text"><%= @prompt %></textarea>
