@@ -2,11 +2,14 @@ defmodule YmnToolWeb.SearchLive.Index do
   use YmnToolWeb, :live_view
 
   @impl true
-  def mount(_params, _session, socket) do
+  def mount(params, _session, socket) do
+    IO.inspect(params)
+
+    q = Map.get(params, "q", "")
     socket
-    |> assign(q: "")
-    |> assign_links("")
-    |> assign(prompt: "")
+    |> assign(q: q)
+    |> assign_links(q)
+    |> assign_prompt(q)
     |> then(&{:ok, &1})
   end
 

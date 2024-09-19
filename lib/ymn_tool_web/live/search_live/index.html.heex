@@ -5,11 +5,19 @@
 
     navigator.clipboard.writeText(value)
   } 
+
+  function readText(){
+     navigator.clipboard.readText()
+      .then(text => {
+        location.href="/?q=" + text
+    })
+  }
+
 </script>
 
-検索ワード <a href="#" phx-click="clear-click" class="rounded-lg bg-violet-900 px-2 text-white mt-20">クリア</a>
+検索ワード <a href="#" phx-click="clear-click" class="rounded-lg bg-violet-900 px-2 text-white mt-20">クリア</a> <a href="#" onclick="readText()" class="rounded-lg bg-violet-900 px-2 text-white mt-20">クリックボードから取得</a>
 <form phx-change="change" phx-submit="submit">
-  <input type="text" name="q" value={@q} />
+  <input id="q" type="text" name="q" value={@q} />
 </form>
 <br />
 <%= for link <- @links do %>
