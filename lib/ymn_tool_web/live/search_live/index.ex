@@ -13,6 +13,7 @@ defmodule YmnToolWeb.SearchLive.Index do
   @impl true
   def handle_event("change", %{"q" => q}, socket), do: update_links(socket, q)
   def handle_event("submit", %{"q" => q}, socket), do: update_links(socket, q)
+  def handle_event("clear-click", _, socket), do: update_links(socket, "")
 
   defp update_links(socket, q) do
     socket
