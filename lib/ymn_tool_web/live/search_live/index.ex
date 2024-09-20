@@ -12,13 +12,16 @@ defmodule YmnToolWeb.SearchLive.Index do
 
   @impl true
   def mount(params, _session, socket) do
-    IO.inspect(params)
+    word_list =
+      File.read!("q_list.txt")
+      |> String.split("\n")
 
     q = Map.get(params, "q", "")
     question_type = Map.get(params, "question_type", "Elixir")
 
     socket
     |> assign(q: q)
+    |> assign(word_list: word_list)
     |> assign(llm_types: LlmTemplates.get_list())
     |> assign(llm_type: "question")
     |> assign(question_types: @question_types)

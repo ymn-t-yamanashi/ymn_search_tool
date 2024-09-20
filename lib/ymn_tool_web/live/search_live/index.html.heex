@@ -28,75 +28,84 @@
     if(event.key == key) document.querySelector("#" + id).click()
   }
 </script>
-検索ワード
-<a
-  id="clear"
-  href="#"
-  phx-click="clear-click"
-  class="rounded-lg bg-violet-900 px-2 text-white mt-20"
->
-  クリア(c)
-</a>
-<a
-  id="#getclip"
-  href="#"
-  onclick="readText()"
-  class="rounded-lg bg-violet-900 px-2 text-white mt-20"
->
-  クリックボードから取得
-</a>
-<form phx-change="change" phx-submit="submit">
-  <input id="q" type="text" name="q" value={@q} />
-  <select id="question_type" name="question_type">
-    <%= for {value, name} <- @question_types do %>
-      <%= if @question_type == value do %>
-        <option value={value} selected><%= name %></option>
-      <% else %>
-        <option value={value}><%= name %></option>
-      <% end %>
-    <% end %>
-  </select>
+<div class="flex flex-row h-screen gap-x-6">
+  <div>
+    検索ワード
+    <a
+      id="clear"
+      href="#"
+      phx-click="clear-click"
+      class="rounded-lg bg-violet-900 px-2 text-white mt-20"
+    >
+      クリア(c)
+    </a>
+    <a
+      id="#getclip"
+      href="#"
+      onclick="readText()"
+      class="rounded-lg bg-violet-900 px-2 text-white mt-20"
+    >
+      クリックボードから取得
+    </a>
+    <form phx-change="change" phx-submit="submit">
+      <input id="q" type="text" name="q" value={@q} />
+      <select id="question_type" name="question_type">
+        <%= for {value, name} <- @question_types do %>
+          <%= if @question_type == value do %>
+            <option value={value} selected><%= name %></option>
+          <% else %>
+            <option value={value}><%= name %></option>
+          <% end %>
+        <% end %>
+      </select>
 
-  <select id="llm_type" name="llm_type">
-    <%= for {value, name} <- @llm_types do %>
-      <%= if @llm_type == value do %>
-        <option value={value} selected><%= name %></option>
-      <% else %>
-        <option value={value}><%= name %></option>
-      <% end %>
+      <select id="llm_type" name="llm_type">
+        <%= for {value, name} <- @llm_types do %>
+          <%= if @llm_type == value do %>
+            <option value={value} selected><%= name %></option>
+          <% else %>
+            <option value={value}><%= name %></option>
+          <% end %>
+        <% end %>
+      </select>
+    </form>
+    <br /> キー割当:()中のキーになります 例えば「g」キーを押すと「gemini」が起動します <br />
+    <br />
+    <%= for {link, index} <- Enum.with_index(@links, 1) do %>
+      <% id = "link#{index}" %>
+      <a
+        id={id}
+        class="rounded-lg bg-violet-600 w-12 px-2 text-white mt-20"
+        href={link.url}
+        target="_blank"
+        noopener
+        noreferrer
+      >
+        <%= link.text %>で検索<%= "(#{index})" %>
+      </a>
+      <br />
     <% end %>
-  </select>
-</form>
-<br /> キー割当:()中のキーになります 例えば「g」キーを押すと「gemini」が起動します <br />
-<br />
-<%= for {link, index} <- Enum.with_index(@links, 1) do %>
-  <% id = "link#{index}" %>
-  <a
-    id={id}
-    class="rounded-lg bg-violet-600 w-12 px-2 text-white mt-20"
-    href={link.url}
-    target="_blank"
-    noopener
-    noreferrer
-  >
-    <%= link.text %>で検索<%= "(#{index})" %>
-  </a>
-  <br />
-<% end %>
-<br />
-<br /> LLM用プロンプト<br />
-<br />
-<a
-  id="gemini"
-  onclick="copy()"
-  class="rounded-lg bg-violet-600 w-12 px-2 text-white mt-20"
-  href="https://gemini.google.com/app"
-  target="_blank"
-  noopener
-  noreferrer
->
-  geminiを起動(g)
-</a>
-<br /> プロンプトはクリックボードにコピーされます<br /> geminiを起動後手動で貼り付け(Ctrl + v)てください <br />
-<br />
-<textarea id="llm" style="height: 330px; width:800px" name="text"><%= @prompt %></textarea>
+    <br />
+    <br /> LLM用プロンプト<br />
+    <br />
+    <a
+      id="gemini"
+      onclick="copy()"
+      class="rounded-lg bg-violet-600 w-12 px-2 text-white mt-20"
+      href="https://gemini.google.com/app"
+      target="_blank"
+      noopener
+      noreferrer
+    >
+      geminiを起動(g)
+    </a>
+    <br /> プロンプトはクリックボードにコピーされます<br /> geminiを起動後手動で貼り付け(Ctrl + v)てください <br />
+    <br />
+    <textarea id="llm" style="height: 300px; width:400px" name="text"><%= @prompt %></textarea>
+  </div>
+  <div class="w-min-96 overflow-y-scroll max-h-[800px]">
+    <%= for word <- @word_list do %>
+      <p class="w-80 text-sm rounded-lg bg-cyan-700  px-2 m-1 text-white"><%= word %></p>
+    <% end %>
+  </div>
+</div>

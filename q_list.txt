@@ -1,0 +1,125 @@
+GKEにElixir環境構築
+EKS／ECSにElixir環境構築
+LambdaにElixir環境構築
+AKSにElixir環境構築
+Azure FunctionsにElixir環境構築
+ピン演算子
+Dialyxir
+EnumモジュールとSQLの違いの理解
+Stream.map／reduce
+Enum（Stream）.flat_map／with_index
+Streamモジュールその他
+キーワードリスト（可変引数化対応）
+defprotocol／defimpl
+@callback／@behaviour
+mix hex.publish
+カスタムmixタスク作成
+send／receive／spawn
+GenServer
+Task
+Supervisor　※プロセスツリー設計も
+GenStage
+Flow
+Broadway
+umbrella
+Poncho
+Agent
+ETS
+Registry
+Mnesia
+global／pg
+Redix
+Yacto
+ExUnit.CaptureIO
+PropCheck
+StreamData
+PropEr
+Faker
+ExMachina
+benchfella
+benchee
+Profiler
+Ueberauth Auth0
+libcluster
+dns_cluster
+Floki
+PromEx
+TelemetryMetricsPrometheus
+GoogleApiCloudTrace
+AwsExRay
+ExInsights
+Spandex
+NewRelicAgent
+KafkaEx
+Tapper
+OpenTelemetry Erlang/Elixir
+TDD必須のアジャイル
+組織形態に沿ったマイクロサービス導入判断
+不必要なコミュニケーションの制限制御
+チーム間連携をチームAPIとして定義
+チーム間コミュニケーションにQoS設置
+性能設計（需要予測、シミュレーション）
+性能を加味したテーブル正規化／非正規化
+耐障害設計
+UI設計（リアルタイム性、モダンデザイン）
+クリーンアーキテクチャ／SOLID原則
+全サービス無停止のサービスリリース設計
+サービス間の循環参照回避
+複数サービスのログ出力依存の解決
+安全なリファクタリング
+プロパティベーステスト
+テーブルドリブンテスト
+DRY
+MVVM
+総合テスト（性能）観点作成
+総合テスト（性能）ケース作成
+総合テスト（障害検知、復旧）観点作成
+総合テスト（障害検知、復旧）ケース作成
+CSS（animation／transform／transition）
+Bootstrap
+Foundation
+Amazon Pay
+Apple Pay
+楽天pay
+PayPayオンライン決済
+LINE Pay
+モノレポ／ポリレポ判断
+GitHub flow／Gitflow／Git Feature flow選定判断
+BlueGreenデプロイ
+カナリアリリース
+CI/CDツールと構成管理ツールを組み合わせて使用
+Cloud Deployment Manager
+CloudFormation
+Azure Resource Manager
+Terraform（複数クラウド利用含む）
+Terraform Cloud
+Infrastructure Manager（複数クラウド利用含む）
+Cloud API Gateway
+Amazon API Gateway
+Azure API Apps
+Cloud Traffic Director
+App Mesh
+Azure Service Fabric
+Service Directory
+AWS Cloud Map
+Datadog
+NewRelic
+Cloud Trace
+AWS X-Ray
+Azure Application Insights
+Cloud Managed Service for Prometheus
+Amazon Managed for Prometheus
+Azure Managed Prometheus
+Prometheus（Unmanaged）
+Kafka
+Zipkin
+Memorystore Redis
+ElastiCache Redis
+Azure Cache Redis
+Redis（Unmanaged）
+Cloud Armor
+AWS WAF
+Azure Application Gateway
+Cloud CDN
+CloudFront
+Azure CDN
