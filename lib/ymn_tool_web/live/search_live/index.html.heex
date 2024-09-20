@@ -105,7 +105,16 @@
   </div>
   <div class="w-min-96 overflow-y-scroll max-h-[800px]">
     <%= for word <- @word_list do %>
-      <p class="w-80 text-sm rounded-lg bg-cyan-700  px-2 m-1 text-white"><%= word %></p>
+      <% bg = if word == @q, do: "bg-cyan-500", else: "bg-cyan-800" %>
+      <a
+        href="#"
+        phx-value-word={word}
+        phx-click="word"
+        class={"w-80 text-sm rounded-lg " <>  bg  <> " px-2 m-1 text-white"}
+      >
+        <%= word %>
+      </a>
+      <br />
     <% end %>
   </div>
 </div>

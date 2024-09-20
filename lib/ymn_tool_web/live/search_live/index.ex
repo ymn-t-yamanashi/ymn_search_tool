@@ -48,6 +48,9 @@ defmodule YmnToolWeb.SearchLive.Index do
 
   def handle_event("clear-click", _, socket), do: update_links(socket, "", "", "question")
 
+  def handle_event("word", %{"word" => word}, socket),
+    do: update_links(socket, word, socket.assigns.question_type, socket.assigns.llm_type)
+
   defp update_links(socket, q, question_type, llm_type) do
     socket
     |> assign(q: q)
