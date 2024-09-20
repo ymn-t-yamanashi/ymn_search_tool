@@ -17,9 +17,10 @@
   } 
 
   function readText(){
+    let questionType = document.querySelector("#question_type")
      navigator.clipboard.readText()
       .then(text => {
-        location.href="/?q=" + text 
+        location.href="/?q=" + text + "&question_type=" + questionType.value
     })
   }
 
@@ -46,10 +47,14 @@
 </a>
 <form phx-change="change" phx-submit="submit">
   <input id="q" type="text" name="q" value={@q} />
-  <select name="question_type">
-    <option value="Elixir" selected >Elixir</option>
-    <option value="JavaScript">JavaScript</option>
-    <option value="tailwindcss" >tailwindcss</option>
+  <select id="question_type" name="question_type">
+    <%= for {value, name} <- @question_types do %>
+      <%= if @question_type == value do %>
+        <option value={value} selected><%= name %></option>
+      <% else %>
+        <option value={value}><%= name %></option>
+      <% end %>
+    <% end %>
   </select>
 </form>
 <br /> キー割当:()中のキーになります 例えば「g」キーを押すと「gemini」が起動します <br />
