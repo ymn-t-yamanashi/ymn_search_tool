@@ -26,20 +26,39 @@
   function keyAssign(event, key, id) {
     if(event.key == key) document.querySelector("#" + id).click()
   }
-
 </script>
-
-検索ワード <a id="clear" href="#" phx-click="clear-click" class="rounded-lg bg-violet-900 px-2 text-white mt-20">クリア(c)</a> <a id="#getclip" href="#" onclick="readText()" class="rounded-lg bg-violet-900 px-2 text-white mt-20">クリックボードから取得</a>
+検索ワード
+<a
+  id="clear"
+  href="#"
+  phx-click="clear-click"
+  class="rounded-lg bg-violet-900 px-2 text-white mt-20"
+>
+  クリア(c)
+</a>
+<a
+  id="#getclip"
+  href="#"
+  onclick="readText()"
+  class="rounded-lg bg-violet-900 px-2 text-white mt-20"
+>
+  クリックボードから取得
+</a>
 <form phx-change="change" phx-submit="submit">
   <input id="q" type="text" name="q" value={@q} />
 </form>
-<br />
-キー割当:()中のキーになります 例えば「g」キーを押すと「gemini」が起動します
-<br />
+<br /> キー割当:()中のキーになります 例えば「g」キーを押すと「gemini」が起動します <br />
 <br />
 <%= for {link, index} <- Enum.with_index(@links, 1) do %>
-  <%  id= "link#{index}" %>
-  <a id={id} class="rounded-lg bg-violet-600 w-12 px-2 text-white mt-20" href={link.url} target="_blank" noopener noreferrer>
+  <% id = "link#{index}" %>
+  <a
+    id={id}
+    class="rounded-lg bg-violet-600 w-12 px-2 text-white mt-20"
+    href={link.url}
+    target="_blank"
+    noopener
+    noreferrer
+  >
     <%= link.text %>で検索<%= "(#{index})" %>
   </a>
   <br />
@@ -53,13 +72,11 @@
   class="rounded-lg bg-violet-600 w-12 px-2 text-white mt-20"
   href="https://gemini.google.com/app"
   target="_blank"
-  noopener noreferrer
+  noopener
+  noreferrer
 >
   geminiを起動(g)
 </a>
-<br />
-プロンプトはクリックボードにコピーされま<br />
-geminiを起動後手動で貼り付け(Ctrl + v)てください
-<br />
+<br /> プロンプトはクリックボードにコピーされます<br /> geminiを起動後手動で貼り付け(Ctrl + v)てください <br />
 <br />
 <textarea id="llm" style="height: 150px; width:400px" name="text"><%= @prompt %></textarea>

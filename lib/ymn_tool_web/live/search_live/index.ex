@@ -1,11 +1,13 @@
 defmodule YmnToolWeb.SearchLive.Index do
   use YmnToolWeb, :live_view
+  alias YmnTool.SearchLink
 
   @impl true
   def mount(params, _session, socket) do
     IO.inspect(params)
 
     q = Map.get(params, "q", "")
+
     socket
     |> assign(q: q)
     |> assign_links(q)
@@ -27,27 +29,8 @@ defmodule YmnToolWeb.SearchLive.Index do
   end
 
   defp assign_links(socket, q) do
-    [
-      set_url("https://hexdocs.pm/elixir/search.html?q=", q, "hexdocs.pm/elixir"),
-      set_url("https://www.google.com/search?q=site%3Ahexdocs.pm+", q, "hexdocs.pm全体"),
-      set_url("https://qiita.com/search?q=Elixir+", q, "Qiita"),
-      set_url("https://www.google.com/search?q=Elixir+", q, "Google"),
-      set_url(
-        "https://translate.google.com/?hl=ja&tab=wT&sl=en&tl=ja&op=translate&text=",
-        q,
-        "Google翻訳"
-      ),
-      set_url("https://www.google.com/search?q=site%3Aelixirschool.com+", q, "elixirschool.com"),
-      %{
-        url: "https://github.com/search?q=#{q}+language%3AElixir+&type=code",
-        text: "github.comコード"
-      }
-    ]
+    SearchLink.get(q)
     |> then(&assign(socket, links: &1))
-  end
-
-  defp set_url(url, q, text) do
-    %{url: "#{url}#{q}", text: text}
   end
 
   defp assign_prompt(socket, q) do
