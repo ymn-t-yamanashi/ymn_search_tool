@@ -10,6 +10,7 @@ defmodule YmnTool.SearchLink do
         q,
         "Google翻訳"
       ),
+      set_url("https://ja.wikipedia.org/wiki/",q ,"wiki"),
       set_url("https://www.google.com/search?q=site%3Aelixirschool.com+", q, "elixirschool.com"),
       %{
         url: "https://github.com/search?q=#{q}+language%3AElixir+&type=code",
