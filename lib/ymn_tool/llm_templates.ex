@@ -1,7 +1,7 @@
 defmodule YmnTool.LlmTemplates do
-  def get(q) do
+  def get(q, question_type \\ "Elixir") do
     """
-    Elixirで質問。下記を日本語で教えて
+    #{question_type}で質問。下記を日本語で教えて
 
     #{q}
     """
