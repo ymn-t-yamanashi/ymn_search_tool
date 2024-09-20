@@ -46,6 +46,11 @@
 </a>
 <form phx-change="change" phx-submit="submit">
   <input id="q" type="text" name="q" value={@q} />
+  <select name="question_type">
+    <option value="Elixir" selected >Elixir</option>
+    <option value="JavaScript">JavaScript</option>
+    <option value="tailwindcss" >tailwindcss</option>
+  </select>
 </form>
 <br /> キー割当:()中のキーになります 例えば「g」キーを押すと「gemini」が起動します <br />
 <br />
