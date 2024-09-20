@@ -56,6 +56,16 @@
       <% end %>
     <% end %>
   </select>
+
+  <select id="llm_type" name="llm_type">
+    <%= for {value, name} <- @llm_types do %>
+      <%= if @llm_type == value do %>
+        <option value={value} selected><%= name %></option>
+      <% else %>
+        <option value={value}><%= name %></option>
+      <% end %>
+    <% end %>
+  </select>
 </form>
 <br /> キー割当:()中のキーになります 例えば「g」キーを押すと「gemini」が起動します <br />
 <br />
@@ -89,4 +99,4 @@
 </a>
 <br /> プロンプトはクリックボードにコピーされます<br /> geminiを起動後手動で貼り付け(Ctrl + v)てください <br />
 <br />
-<textarea id="llm" style="height: 150px; width:400px" name="text"><%= @prompt %></textarea>
+<textarea id="llm" style="height: 330px; width:800px" name="text"><%= @prompt %></textarea>

@@ -19,28 +19,38 @@ defmodule YmnToolWeb.SearchLive.Index do
 
     socket
     |> assign(q: q)
+    |> assign(llm_types: LlmTemplates.get_list())
+    |> assign(llm_type: "question")
     |> assign(question_types: @question_types)
     |> assign(question_type: question_type)
     |> assign_links(q, question_type)
-    |> assign_prompt(q, question_type)
+    |> assign_prompt(q, question_type, "question")
     |> then(&{:ok, &1})
   end
 
   @impl true
-  def handle_event("change", %{"q" => q, "question_type" => question_type}, socket),
-    do: update_links(socket, q, question_type)
+  def handle_event(
+        "change",
+        %{"q" => q, "question_type" => question_type, "llm_type" => llm_type},
+        socket
+      ),
+      do: update_links(socket, q, question_type, llm_type)
 
-  def handle_event("submit", %{"q" => q, "question_type" => question_type}, socket),
-    do: update_links(socket, q, question_type)
+  def handle_event(
+        "submit",
+        %{"q" => q, "question_type" => question_type, "llm_type" => llm_type},
+        socket
+      ),
+      do: update_links(socket, q, question_type, llm_type)
 
-  def handle_event("clear-click", _, socket), do: update_links(socket, "", "")
+  def handle_event("clear-click", _, socket), do: update_links(socket, "", "", "question")
 
-  defp update_links(socket, q, question_type) do
+  defp update_links(socket, q, question_type, llm_type) do
     socket
     |> assign(q: q)
     |> assign(question_type: question_type)
     |> assign_links(q, question_type)
-    |> assign_prompt(q, question_type)
+    |> assign_prompt(q, question_type, llm_type)
     |> then(&{:noreply, &1})
   end
 
@@ -49,8 +59,8 @@ defmodule YmnToolWeb.SearchLive.Index do
     |> then(&assign(socket, links: &1))
   end
 
-  defp assign_prompt(socket, q, question_type) do
-    LlmTemplates.get(q, question_type)
+  defp assign_prompt(socket, q, question_type, llm) do
+    LlmTemplates.get(q, question_type, llm)
     |> then(&assign(socket, prompt: &1))
   end
 end
