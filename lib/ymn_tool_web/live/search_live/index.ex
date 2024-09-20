@@ -1,6 +1,7 @@
 defmodule YmnToolWeb.SearchLive.Index do
   use YmnToolWeb, :live_view
   alias YmnTool.SearchLink
+  alias YmnTool.LlmTemplates
 
   @impl true
   def mount(params, _session, socket) do
@@ -34,11 +35,7 @@ defmodule YmnToolWeb.SearchLive.Index do
   end
 
   defp assign_prompt(socket, q) do
-    """
-    Elixirで質問。下記を日本語で教えて
-
-    #{q}
-    """
+    LlmTemplates.get(q)
     |> then(&assign(socket, prompt: &1))
   end
 end
