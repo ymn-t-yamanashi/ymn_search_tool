@@ -7,7 +7,9 @@ defmodule YmnToolWeb.SearchLive.Index do
     {"", "指定なし"},
     {"Elixir", "Elixir"},
     {"JavaScript", "JavaScript"},
-    {"tailwindcss", "tailwindcss"}
+    {"tailwindcss", "tailwindcss"},
+    {"仕事", "仕事"},
+    {"システム開発", "システム開発"}
   ]
 
   @impl true
