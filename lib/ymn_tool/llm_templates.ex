@@ -2,7 +2,8 @@ defmodule YmnTool.LlmTemplates do
   def get_list do
     [
       {"question", "質問"},
-      {"study", "勉強方法"}
+      {"study", "勉強方法"},
+      {"intention", "意図"}
     ]
   end
 
@@ -32,6 +33,16 @@ defmodule YmnTool.LlmTemplates do
     知りたいことは下記
 
     #{q}
+    """
+  end
+
+  def get(q, _question_type, "intention") do
+    """
+    私の会社システム会社である
+
+    上長が私に「#{q}」ついて勉強してと言っている
+    「#{q}」とはどんな意図で言っている？
+
     """
   end
 
