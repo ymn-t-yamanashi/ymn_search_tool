@@ -57,6 +57,7 @@ defmodule YmnToolWeb.SearchLive.Index do
     socket
     |> assign(q: q)
     |> assign(question_type: question_type)
+    |> assign(llm_type: llm_type)
     |> assign_links(q, question_type)
     |> assign_prompt(q, question_type, llm_type)
     |> then(&{:noreply, &1})
