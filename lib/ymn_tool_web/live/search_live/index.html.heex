@@ -1,10 +1,12 @@
 <script>
   document.addEventListener('keydown', (event) => {
     focus = document.querySelector("textarea:focus-visible, input:focus-visible")
+    links = document.querySelectorAll("#links a")
+
     if (focus != null) return 
     keyAssign(event, "g", "gemini")
     keyAssign(event, "c", "clear")
-    for(i = 1; i <= 7; i++) {
+    for(i = 1; i <= links.length; i++) {
       keyAssign(event, i, "link" + i)
     }
 
@@ -71,20 +73,22 @@
     </form>
     <br /> キー割当:()中のキーになります 例えば「g」キーを押すと「gemini」が起動します <br />
     <br />
-    <%= for {link, index} <- Enum.with_index(@links, 1) do %>
-      <% id = "link#{index}" %>
-      <a
-        id={id}
-        class="rounded-lg bg-violet-600 w-12 px-2 text-white mt-20"
-        href={link.url}
-        target="_blank"
-        noopener
-        noreferrer
-      >
-        <%= link.text %>で検索<%= "(#{index})" %>
-      </a>
-      <br />
-    <% end %>
+    <div id="links">
+      <%= for {link, index} <- Enum.with_index(@links, 1) do %>
+        <% id = "link#{index}" %>
+        <a
+          id={id}
+          class="rounded-lg bg-violet-600 w-12 px-2 text-white mt-20"
+          href={link.url}
+          target="_blank"
+          noopener
+          noreferrer
+        >
+          <%= link.text %>で検索<%= "(#{index})" %>
+        </a>
+        <br />
+      <% end %>
+    </div>
     <br />
     <br /> LLM用プロンプト<br />
     <br />
