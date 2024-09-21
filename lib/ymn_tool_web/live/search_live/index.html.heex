@@ -6,7 +6,7 @@
     result = event.results[0][0].transcript
     q = document.querySelector("#q")
     q.value = result
-    q.focus()
+    document.querySelector("form").requestSubmit()
   } 
   document.addEventListener('keydown', (event) => {
     focus = document.querySelector("textarea:focus-visible, input:focus-visible")
