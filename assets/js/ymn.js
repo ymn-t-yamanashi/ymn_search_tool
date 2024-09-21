@@ -19,8 +19,10 @@ function init() {
         q.value = result
         document.querySelector("form").requestSubmit()
     }
-
-    document.querySelector("#getclip") //.addEventListener("click", (event) => {readText()});
+    
+    document.querySelector("#recognition").onclick = recognition_start
+    document.querySelector("#getclip").onclick = readText
+    document.querySelector("#gemini").onclick = copy
 
     document.addEventListener('keydown', (event) => {
         focus = document.querySelector("textarea:focus-visible, input:focus-visible")
@@ -32,8 +34,12 @@ function init() {
         for(i = 1; i <= links.length; i++) {
             keyAssign(event, i, "link" + i)
         }
-        if(event.key == "r") recognition.start()
+        if(event.key == "r") recognition_start()
     });
+
+    function recognition_start(){
+      recognition.start()
+    }
 }
 
 function copy(){
