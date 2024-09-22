@@ -1,5 +1,5 @@
-import {ymn} from "./ymn.js"
+import {Ymn} from "./ymn.js"
 
 export const Hooks = {
-    ymn: ymn
+    Ymn: Ymn
 }
