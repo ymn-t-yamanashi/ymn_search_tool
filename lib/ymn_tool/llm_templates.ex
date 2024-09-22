@@ -8,8 +8,10 @@ defmodule YmnTool.LlmTemplates do
   end
 
   def get(q, question_type, "question") do
+    question = get_question_type(question_type, "について")
+
     """
-    #{get_question_type(question_type, "について")}質問。下記を日本語で教えて
+    <%= question %>質問。下記を日本語で教えて
     フォーマットは
     1) 概要
     2) 例
@@ -18,8 +20,9 @@ defmodule YmnTool.LlmTemplates do
 
     知りたいことは下記
 
-    #{q}
+    <%= q %>
     """
+    |>  EEx.eval_string([q: q, question: question])
   end
 
   def get(q, question_type, "study") do
