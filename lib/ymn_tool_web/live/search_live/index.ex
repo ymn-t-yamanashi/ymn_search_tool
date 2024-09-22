@@ -2,6 +2,7 @@ defmodule YmnToolWeb.SearchLive.Index do
   use YmnToolWeb, :live_view
   alias YmnTool.SearchLink
   alias YmnTool.LlmTemplates
+  alias YmnToolWeb.ParlanceComponents
 
   @question_types [
     {"", "指定なし"},
