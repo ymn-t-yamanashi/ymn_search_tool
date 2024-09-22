@@ -1,5 +1,5 @@
 import {ymn} from "./ymn.js"
 
-export const hooks = {
+export const Hooks = {
     ymn: ymn
 }
