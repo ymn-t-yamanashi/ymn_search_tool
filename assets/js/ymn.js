@@ -1,11 +1,9 @@
-export const hooks = {
-  ymn: {
-    mounted() {
-      init()
-    },
-    updated() {
-      init()
-    },
+export const ymn = {
+  mounted() {
+    init()
+  },
+  updated() {
+    init()
   },
 }
 
