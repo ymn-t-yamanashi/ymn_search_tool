@@ -49,6 +49,13 @@ defmodule YmnTool.LlmTemplates do
     """
   end
 
+  def load() do
+    File.read!("llm_templates.txt")
+    |> String.split("##")
+    |> Enum.reject(& &1 == "")
+    |> IO.inspect()
+    |> Enum.count()
+  end
   def get_question_type("", _), do: ""
   def get_question_type(question_type, statement), do: "#{question_type}#{statement}"
 end
