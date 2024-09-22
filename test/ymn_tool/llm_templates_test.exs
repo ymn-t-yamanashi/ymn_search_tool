@@ -17,4 +17,10 @@ defmodule YmnTool.LlmTemplatesTest do
     assert %{key: "question", title: "質問", contents: contents} = ret |> List.first()
     assert contents =~ "質問。下記を日本語で教えてtest"
   end
+
+  test "get" do
+    contents = YmnTool.LlmTemplates.get("テスト", "Elixir", "question")
+    assert contents =~ "Elixirについて質問。下記を日本語で教えて"
+    assert contents =~ "テスト"
+  end
 end

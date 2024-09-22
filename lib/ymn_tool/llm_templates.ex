@@ -51,7 +51,6 @@ defmodule YmnTool.LlmTemplates do
     |> String.split("##")
     |> Enum.reject(&(&1 == ""))
     |> Enum.map(&split_header(&1))
-    |> IO.inspect()
   end
 
   defp split_header(data) do
