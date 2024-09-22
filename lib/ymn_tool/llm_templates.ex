@@ -53,10 +53,16 @@ defmodule YmnTool.LlmTemplates do
     File.read!("llm_templates.txt")
     |> String.split("##")
     |> Enum.reject(& &1 == "")
+    |> Enum.map(& split_header(&1))
+    |> IO.inspect()
     # TODO 試作
     |> List.first()
-    |> String.split("|")
-    |> IO.inspect()
+
+  end
+
+  defp split_header(data) do
+      data |>
+      String.split("|")
   end
 
 
