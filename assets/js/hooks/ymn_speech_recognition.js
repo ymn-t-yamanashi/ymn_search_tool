@@ -1,4 +1,4 @@
-import {addkeydownAndOnclick} from "./ymnlib.js"
+import {addkeydownAndOnclick} from "../ymnlib.js"
 
 export const YmnSpeechRecognition = {
   mounted() {

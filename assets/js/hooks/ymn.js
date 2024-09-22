@@ -1,4 +1,4 @@
-import {addkeydownAndOnclick} from "./ymnlib"
+import {addkeydownAndOnclick} from "../ymnlib.js"
 
 export const Ymn = {
   mounted() {
