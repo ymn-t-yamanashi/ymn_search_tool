@@ -1,10 +1,7 @@
 defmodule YmnTool.LlmTemplates do
   def get_list do
-    [
-      {"question", "質問"},
-      {"study", "勉強方法"},
-      {"intention", "意図"}
-    ]
+    load("llm_templates.txt")
+    |> Enum.map(&{&1.key, &1.title})
   end
 
   def get(q, question_type, "question") do
