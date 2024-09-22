@@ -2,6 +2,6 @@ defmodule YmnTool.LlmTemplatesTest do
   use ExUnit.Case
 
   test "load" do
-    assert 3 == YmnTool.LlmTemplates.load()
+    assert "question,質問" == YmnTool.LlmTemplates.load() |> List.first()
   end
 end
