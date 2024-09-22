@@ -15,9 +15,7 @@ defmodule YmnToolWeb.SearchLive.Index do
 
   @impl true
   def mount(params, _session, socket) do
-    parlance_list =
-      File.read!("q_list.txt")
-      |> String.split("\n")
+    parlance_list = FastGlobal.get(:parlance_list)
 
     q = Map.get(params, "q", "")
     question_type = Map.get(params, "question_type", "Elixir")
