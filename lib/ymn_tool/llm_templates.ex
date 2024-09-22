@@ -22,7 +22,7 @@ defmodule YmnTool.LlmTemplates do
 
     <%= q %>
     """
-    |>  EEx.eval_string([q: q, question: question])
+    |> EEx.eval_string(q: q, question: question)
   end
 
   def get(q, question_type, "study") do
@@ -49,22 +49,20 @@ defmodule YmnTool.LlmTemplates do
     """
   end
 
-  def load() do
-    File.read!("llm_templates.txt")
+  def load(path) do
+    File.read!(path)
     |> String.split("##")
-    |> Enum.reject(& &1 == "")
-    |> Enum.map(& split_header(&1))
+    |> Enum.reject(&(&1 == ""))
+    |> Enum.map(&split_header(&1))
     |> IO.inspect()
-    # TODO 試作
-    |> List.first()
-
   end
 
   defp split_header(data) do
-      data |>
-      String.split("|")
-  end
+    [header | [contents]] = String.split(data, "|")
+    [key | [title]] = String.split(header, ",")
 
+    %{key: key, title: title, contents: contents}
+  end
 
   def get_question_type("", _), do: ""
   def get_question_type(question_type, statement), do: "#{question_type}#{statement}"
