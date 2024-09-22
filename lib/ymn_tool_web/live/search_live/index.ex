@@ -15,7 +15,7 @@ defmodule YmnToolWeb.SearchLive.Index do
 
   @impl true
   def mount(params, _session, socket) do
-    parlance_list = FastGlobal.get(:parlance_list)
+    parlance_list = load_parlance_list()
 
     q = Map.get(params, "q", "")
     question_type = Map.get(params, "question_type", "Elixir")
@@ -70,5 +70,10 @@ defmodule YmnToolWeb.SearchLive.Index do
   defp assign_prompt(socket, q, question_type, llm) do
     LlmTemplates.get(q, question_type, llm)
     |> then(&assign(socket, prompt: &1))
+  end
+
+  defp load_parlance_list() do
+    File.read!("q_list.txt")
+    |> String.split("\n")
   end
 end
