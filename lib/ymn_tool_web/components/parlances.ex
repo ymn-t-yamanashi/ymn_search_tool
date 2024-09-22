@@ -4,21 +4,21 @@ defmodule YmnToolWeb.ParlanceComponents do
   """
   use Phoenix.Component
 
-  attr :word_list, :list, required: true
+  attr :parlance_list, :list, required: true
   attr :q, :string, required: true
 
   def parlance(assigns) do
     ~H"""
-    <%= for word <- @word_list do %>
-      <% bg = if word == @q, do: "bg-cyan-500", else: "bg-cyan-800" %>
+    <%= for parlance <- @parlance_list do %>
+      <% bg = if parlance == @q, do: "bg-cyan-500", else: "bg-cyan-800" %>
       <a
         href="#"
-        phx-value-word={word}
-        phx-click="word"
+        phx-value-parlance={parlance}
+        phx-click="parlance"
         class={"w-80 text-sm rounded-lg " <>  bg  <> " px-2 m-1
           text-white"}
       >
-        <%= word %>
+        <%= parlance %>
       </a>
       <br />
     <% end %>

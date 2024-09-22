@@ -15,7 +15,7 @@ defmodule YmnToolWeb.SearchLive.Index do
 
   @impl true
   def mount(params, _session, socket) do
-    word_list =
+    parlance_list =
       File.read!("q_list.txt")
       |> String.split("\n")
 
@@ -24,7 +24,7 @@ defmodule YmnToolWeb.SearchLive.Index do
 
     socket
     |> assign(q: q)
-    |> assign(word_list: word_list)
+    |> assign(parlance_list: parlance_list)
     |> assign(llm_types: LlmTemplates.get_list())
     |> assign(llm_type: "question")
     |> assign(question_types: @question_types)
@@ -51,8 +51,8 @@ defmodule YmnToolWeb.SearchLive.Index do
 
   def handle_event("clear-click", _, socket), do: update_links(socket, "", "", "question")
 
-  def handle_event("word", %{"word" => word}, socket),
-    do: update_links(socket, word, socket.assigns.question_type, socket.assigns.llm_type)
+  def handle_event("parlance", %{"parlance" => parlance}, socket),
+    do: update_links(socket, parlance, socket.assigns.question_type, socket.assigns.llm_type)
 
   defp update_links(socket, q, question_type, llm_type) do
     socket
