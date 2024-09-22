@@ -1,3 +1,5 @@
+import {addkeydownAndOnclick} from "./ymnlib"
+
 export const Ymn = {
   mounted() {
     init()
@@ -8,7 +10,7 @@ export const Ymn = {
 }
 
 const init = () => {
-  document.querySelector("#getclip").onclick = readText
+  addkeydownAndOnclick("#getclip", "p", readText)
   document.querySelector("#gemini").onclick = copy
 
   document.addEventListener('keydown', (event) => {
