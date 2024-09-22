@@ -21,7 +21,6 @@ const init = () => {
     for (i = 1; i <= links.length; i++) {
       keyAssign(event, i, "link" + i)
     }
-    if (event.key == "r") recognition_start()
   })
 
 }

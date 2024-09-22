@@ -1,3 +1,5 @@
+import {addkeydownAndOnclick} from "./ymnlib.js"
+
 export const YmnSpeechRecognition = {
   mounted() {
     init()
@@ -21,12 +23,5 @@ const init = () => {
   const recognition_start = () => {
     recognition.start()
   }
-
-  document.querySelector("#recognition").onclick = recognition_start
-
-  document.addEventListener('keydown', (event) => {
-    focus = document.querySelector("textarea:focus-visible, input:focus-visible")
-    if (focus != null) return
-    if (event.key == "r") recognition_start()
-  })
+  addkeydownAndOnclick("#recognition", "r", recognition_start)
 }
