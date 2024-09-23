@@ -9,20 +9,22 @@
     >
       クリア(c)
     </a>
-    <a id="getclip" href="#" class="rounded-lg bg-violet-900 px-2 text-white mt-20">
+    <a id="getclip" href="#" class="rounded-lg bg-violet-900 px-2 text-white mt-20 mx-1">
       クリックボードから取得(p)
     </a>
     <a
       id="recognition"
       phx-hook="YmnSpeechRecognition"
       href="#"
-      class="rounded-lg bg-violet-900 px-2 text-white mt-20"
+      class="rounded-lg bg-violet-900 px-2 text-white mt-20 mx-1"
     >
       音声認識(r)
     </a>
+    <br />
+    <br />
     <form phx-change="change" phx-submit="submit">
-      <input id="q" type="text" name="q" value={@q} />
-      <select id="question_type" name="question_type">
+      <input class="text-sm" id="q" type="text" name="q" value={@q} />
+      <select class="text-sm" id="question_type" name="question_type">
         <%= for {value, name} <- @question_types do %>
           <%= if @question_type==value do %>
             <option value={value} selected>
@@ -36,7 +38,7 @@
         <% end %>
       </select>
 
-      <select id="llm_type" name="llm_type">
+      <select class="text-sm" id="llm_type" name="llm_type">
         <%= for {value, name} <- @llm_types do %>
           <%= if @llm_type==value do %>
             <option value={value} selected>
@@ -52,12 +54,12 @@
     </form>
     <br /> キー割当:()中のキーになります 例えば「g」キーを押すと「gemini」が起動します <br />
     <br />
-    <div id="links">
+    <div id="links" class="max-w-96">
       <%= for {link, index} <- Enum.with_index(@links, 1) do %>
         <% id = "link#{index}" %>
         <a
           id={id}
-          class="rounded-lg bg-violet-600 w-12 px-2 text-white mt-20"
+          class="whitespace-nowrap rounded-lg bg-violet-600 w-12 px-2 text-white mt-20 mx-1"
           href={link.url}
           target="_blank"
           noopener
@@ -65,12 +67,9 @@
         >
           <%= link.text %>で検索<%= "(#{index})" %>
         </a>
-        <br />
       <% end %>
     </div>
-    <br />
     <br /> LLM用プロンプト<br />
-    <br />
     <a
       id="gemini"
       class="rounded-lg bg-violet-600 w-12 px-2 text-white mt-20"
@@ -83,9 +82,9 @@
     </a>
     <br /> プロンプトはクリックボードにコピーされます<br /> geminiを起動後手動で貼り付け(Ctrl + v)てください <br />
     <br />
-    <textarea id="llm" style="height: 300px; width:400px" name="text"><%= @prompt %></textarea>
+    <textarea id="llm" class="text-sm h-[250px] w-[400px]" name="text"><%= @prompt %></textarea>
   </div>
-  <div class="w-min-96 overflow-y-scroll max-h-[800px]">
+  <div class="w-min-96 overflow-y-scroll max-h-[700px]">
     <ParlanceComponents.parlance q={@q} parlance_list={@parlance_list} />
   </div>
 </div>
