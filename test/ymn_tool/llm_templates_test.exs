@@ -5,11 +5,12 @@ defmodule YmnTool.LlmTemplatesTest do
     expected = [
       {"question", "質問"},
       {"study", "勉強方法"},
-      {"intention", "意図"},
-      {"error", "エラーの解決"}
+      {"intention", "意図"}
     ]
 
-    assert YmnTool.LlmTemplates.get_list() == expected
+    llm_templates_data = YmnTool.LlmTemplates.load("test/data/llm_templates_data.txt")
+
+    assert YmnTool.LlmTemplates.get_list(llm_templates_data) == expected
   end
 
   test "load" do
@@ -20,7 +21,8 @@ defmodule YmnTool.LlmTemplatesTest do
   end
 
   test "get" do
-    contents = YmnTool.LlmTemplates.get("テスト", "Elixir", "question")
+    llm_templates_data = YmnTool.LlmTemplates.load("test/data/llm_templates_data.txt")
+    contents = YmnTool.LlmTemplates.get(llm_templates_data, "テスト", "Elixir", "question")
     assert contents =~ "Elixirについて質問"
     assert contents =~ "テスト"
   end

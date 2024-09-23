@@ -1,13 +1,13 @@
 defmodule YmnTool.LlmTemplates do
-  def get_list do
-    load("llm_templates.txt")
+  def get_list(llm_templates) do
+    llm_templates
     |> Enum.map(&{&1.key, &1.title})
   end
 
-  def get(q, question_type, key) do
+  def get(llm_templates, q, question_type, key) do
     question = get_question_type(question_type, "について")
 
-    load("llm_templates.txt")
+    llm_templates
     |> Enum.filter(&(&1.key == key))
     |> List.first()
     |> Map.get(:contents)

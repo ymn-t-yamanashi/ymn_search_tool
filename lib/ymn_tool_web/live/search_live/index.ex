@@ -20,10 +20,12 @@ defmodule YmnToolWeb.SearchLive.Index do
     q = Map.get(params, "q", "")
     question_type = Map.get(params, "question_type", "Elixir")
 
+    llm_templates = LlmTemplates.load("llm_templates.txt")
+
     socket
     |> assign(q: q)
     |> assign(parlance_list: parlance_list)
-    |> assign(llm_types: LlmTemplates.get_list())
+    |> assign(llm_types: LlmTemplates.get_list(llm_templates))
     |> assign(llm_type: "question")
     |> assign(question_types: @question_types)
     |> assign(question_type: question_type)
@@ -68,7 +70,8 @@ defmodule YmnToolWeb.SearchLive.Index do
   end
 
   defp assign_prompt(socket, q, question_type, llm) do
-    LlmTemplates.get(q, question_type, llm)
+    LlmTemplates.load("llm_templates.txt")
+    |> LlmTemplates.get(q, question_type, llm)
     |> then(&assign(socket, prompt: &1))
   end
 
