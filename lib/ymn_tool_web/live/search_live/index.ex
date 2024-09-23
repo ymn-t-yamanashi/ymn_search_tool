@@ -15,12 +15,13 @@ defmodule YmnToolWeb.SearchLive.Index do
 
   @impl true
   def mount(params, _session, socket) do
+    llm_templates_path = Application.get_env(:ymn_tool, :llm_templates_path)
     parlance_list = load_parlance_list()
 
     q = Map.get(params, "q", "")
     question_type = Map.get(params, "question_type", "Elixir")
 
-    llm_templates = LlmTemplates.load("llm_templates.txt")
+    llm_templates = LlmTemplates.load(llm_templates_path)
 
     socket
     |> assign(q: q)

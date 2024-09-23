@@ -7,6 +7,8 @@
 # General application configuration
 import Config
 
+config :ymn_tool, llm_templates_path: "llm_templates.txt"
+
 config :ymn_tool,
   generators: [timestamp_type: :utc_datetime]
 
