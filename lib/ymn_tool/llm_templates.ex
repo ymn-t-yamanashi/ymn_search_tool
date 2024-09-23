@@ -28,6 +28,6 @@ defmodule YmnTool.LlmTemplates do
     %{key: key, title: title, contents: contents}
   end
 
-  def get_question_type("", _), do: ""
-  def get_question_type(question_type, statement), do: "#{question_type}#{statement}"
+  defp get_question_type("", _), do: ""
+  defp get_question_type(question_type, statement), do: "#{question_type}#{statement}"
 end

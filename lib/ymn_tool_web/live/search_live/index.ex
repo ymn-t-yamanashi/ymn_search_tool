@@ -24,6 +24,7 @@ defmodule YmnToolWeb.SearchLive.Index do
 
     socket
     |> assign(q: q)
+    |> assign(llm_templates: llm_templates)
     |> assign(parlance_list: parlance_list)
     |> assign(llm_types: LlmTemplates.get_list(llm_templates))
     |> assign(llm_type: "question")
@@ -70,7 +71,7 @@ defmodule YmnToolWeb.SearchLive.Index do
   end
 
   defp assign_prompt(socket, q, question_type, llm) do
-    LlmTemplates.load("llm_templates.txt")
+    socket.assigns.llm_templates
     |> LlmTemplates.get(q, question_type, llm)
     |> then(&assign(socket, prompt: &1))
   end
