@@ -37,9 +37,9 @@ defmodule YmnToolWeb.SearchLive.IndexTest do
   test "clear-click", %{conn: conn} do
     {:ok, lv, _html} = live(conn, ~p"/")
 
+    # クリアボタンクリック
     assert lv
            |> element("form")
-           |> IO.inspect()
            |> render_change(%{q: "12s3"}) =~ "12s3"
 
     lv
@@ -49,5 +49,48 @@ defmodule YmnToolWeb.SearchLive.IndexTest do
     assert lv
            |> element("#q")
            |> render() =~ "value=\"\"/"
+  end
+
+  test "question_type", %{conn: conn} do
+    {:ok, lv, _html} = live(conn, ~p"/")
+
+    # 質問内容選択
+    assert lv
+           |> element("form")
+           |> render_change(%{question_type: "Ubuntu"}) =~ "Ubuntu"
+
+    assert lv
+           |> element("#llm")
+           |> render() =~ "Ubuntuについて質問"
+  end
+
+  test "llm_type", %{conn: conn} do
+    {:ok, lv, _html} = live(conn, ~p"/")
+
+    # LLM選択
+    assert lv
+           |> element("form")
+           |> render_change(%{llm_type: "study"}) =~ "勉強方法"
+
+    assert lv
+           |> element("#llm")
+           |> render() =~ "Elixirについて勉強方法を教えて"
+  end
+
+  test "click parlance", %{conn: conn} do
+    {:ok, lv, _html} = live(conn, ~p"/")
+
+    # 用語クリック
+    assert lv
+           |> element("div a[phx-value-parlance]:first-child")
+           |> render_click() =~ "GKEにElixir環境構築"
+
+    assert lv
+           |> element("#q")
+           |> render() =~ "GKEにElixir環境構築"
+
+    assert lv
+           |> element("#llm")
+           |> render() =~ "GKEにElixir環境構築"
   end
 end
