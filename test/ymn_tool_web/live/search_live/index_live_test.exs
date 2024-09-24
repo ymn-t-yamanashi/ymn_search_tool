@@ -2,6 +2,8 @@ defmodule YmnToolWeb.SearchLive.IndexTest do
   use YmnToolWeb.ConnCase
   import Phoenix.LiveViewTest
 
+  # https://hexdocs.pm/phoenix_live_view/Phoenix.LiveViewTest.html
+
   test "index", %{conn: conn} do
     {:ok, lv, html} = live(conn, ~p"/")
     assert html =~ "検索ワード"
@@ -30,5 +32,22 @@ defmodule YmnToolWeb.SearchLive.IndexTest do
              "div a.w-80.text-sm.rounded-lg.bg-cyan-800.px-2.m-1.text-white",
              "GKEにElixir環境構築"
            )
+  end
+
+  test "clear-click", %{conn: conn} do
+    {:ok, lv, _html} = live(conn, ~p"/")
+
+    assert lv
+           |> element("form")
+           |> IO.inspect()
+           |> render_change(%{q: "12s3"}) =~ "12s3"
+
+    lv
+    |> element("#clear")
+    |> render_click()
+
+    assert lv
+           |> element("#q")
+           |> render() =~ "value=\"\"/"
   end
 end

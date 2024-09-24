@@ -7,7 +7,7 @@ defmodule YmnToolWeb.SearchLive.Index do
   @question_types [
     {"", "指定なし"},
     {"Elixir", "Elixir"},
-    {"Phoenix Framework","Phoenix Framework"},
+    {"Phoenix Framework", "Phoenix Framework"},
     {"LiveView", "LiveView"},
     {"Ubuntu", "Ubuntu"},
     {"JavaScript", "JavaScript"},
