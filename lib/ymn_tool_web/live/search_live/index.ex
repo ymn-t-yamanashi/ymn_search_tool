@@ -81,7 +81,7 @@ defmodule YmnToolWeb.SearchLive.Index do
   end
 
   defp load_parlance_list() do
-    File.read!("q_list.txt")
+    File.read!("priv/static/q_list.txt")
     |> String.split("\n")
   end
 end
