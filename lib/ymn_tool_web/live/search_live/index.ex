@@ -81,7 +81,8 @@ defmodule YmnToolWeb.SearchLive.Index do
   end
 
   defp load_parlance_list() do
-    File.read!("priv/static/q_list.txt")
+    Application.get_env(:ymn_tool, :q_list_path)
+    |> File.read!()
     |> String.split("\n")
   end
 end

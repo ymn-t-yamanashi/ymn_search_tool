@@ -1,5 +1,8 @@
 import Config
 
+config :ymn_tool, llm_templates_path: "priv/static/llm_templates.txt"
+config :ymn_tool, q_list_path: "priv/static/q_list.txt"
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #

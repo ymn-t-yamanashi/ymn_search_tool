@@ -21,6 +21,9 @@ if System.get_env("PHX_SERVER") do
 end
 
 if config_env() == :prod do
+  config :ymn_tool, llm_templates_path: "/app/lib/ymn_tool-0.1.0/priv/static/llm_templates.txt"
+  config :ymn_tool, q_list_path: "/app/lib/ymn_tool-0.1.0/priv/static/q_list.txt"
+
   # The secret key base is used to sign/encrypt cookies and other secrets.
   # A default value is used in config/dev.exs and config/test.exs but you
   # want to use a different value for prod and you most likely don't want
@@ -34,13 +37,13 @@ if config_env() == :prod do
   #     You can generate one by calling: mix phx.gen.secret
   #     """
 
-  host = System.get_env("PHX_HOST") || "example.com"
+  # host = System.get_env("PHX_HOST") || "example.com"
   port = String.to_integer(System.get_env("PORT") || "4000")
 
   config :ymn_tool, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
   config :ymn_tool, YmnToolWeb.Endpoint,
-    url: [host: host, port: 443, scheme: "https"],
+    # url: [host: host, port: 443, scheme: "https"],
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
